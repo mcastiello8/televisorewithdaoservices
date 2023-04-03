@@ -134,18 +134,56 @@ public class TelevisoreServiceImpl implements TelevisoreService {
 	}
 
 	public Televisore cercaTelevisorePiuGrande() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Televisore result = new Televisore();
+		try (Connection connection = MyConnection.getConnection(Constants.DRIVER_NAME, Constants.CONNECTION_URL)) {
+
+			// inietto la connection nel dao
+			televisoreDAO.setConnection(connection);
+
+			// eseguo quello che realmente devo fare
+			result = televisoreDAO.findTelevisorePiuGrande();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return result;
 	}
 
 	public int quantiTelevisoriProdottiTraDueDate(LocalDate primaData, LocalDate secondaData) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		try (Connection connection = MyConnection.getConnection(Constants.DRIVER_NAME, Constants.CONNECTION_URL)) {
+
+			// inietto la connection nel dao
+			televisoreDAO.setConnection(connection);
+
+			// eseguo quello che realmente devo fare
+			result = televisoreDAO.findHowManyTelevisoriProdottiTraDueDate(primaData, secondaData);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+		return result;
 	}
 
 	public List qualiMarcheTelevisoriProdottiNegliUltimiSeiMesi() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> result = new ArrayList<>();
+		try(Connection connection = MyConnection.getConnection(Constants.DRIVER_NAME, Constants.CONNECTION_URL)) {
+
+			// inietto la connection nel dao
+			televisoreDAO.setConnection(connection);
+
+			// eseguo quello che realmente devo fare
+			result = televisoreDAO.whichMarcheTelevisoriProdottiNegliUltimiSeiMesi();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} 
+		return result;
+
 	}
 
 }
